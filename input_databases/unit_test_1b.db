@@ -1,7 +1,7 @@
 Test {
     test_dir ="/Users/cpf/Desktop/build-6-2/Testing/"
     // test_dir ="./"
-    unit_test = 5 // Will print out specific files for analysis
+    unit_test = 1 // Will print out specific files for analysis
     // 0 -- default; does not produce print files
     // 1 BCC case, force-driven 1e-4 -- make sure to turn off two-phase functionality -- test against analytical permeability
     // 2 Parallel plates, Poiseuille flow - force-driven -- can test against analytical profile; with offset walls
@@ -18,30 +18,30 @@ Test {
 
 
 Color {
-    tauA = 1.0  // relaxation time for fluid A
-    tauB = 1.0  // relaxation time for fluid B
+    tauA = 2.0  // relaxation time for fluid A
+    tauB = 2.0  // relaxation time for fluid B
     rhoA = 1.0     // mass density for fluid A
     rhoB = 1.0     // mass density for fluid B
     alpha = 1e-3     // controls interfacial tension between fluids
-    beta = 0.95   // controls interface width
-    F = 0, 0, 0    // external body force applied to the system
+    beta = 0.99   // controls interface width
+    F = 0, 0, 1e-4    // external body force applied to the system
     Restart = false  // restart from checkpoint file?
     din = 0.998        // density at inlet (if external BC is applied)
     dout = 1.002                // density at outlet (if external BC is applied )
-    timestepMax = 30002       // maximum number of timesteps to simulate
+    timestepMax = 3002       // maximum number of timesteps to simulate
     flux = 0.0                 // volumetric flux in voxels per timestep (if flux BC is applied)
-    contact_angle = 130
+    contact_angle = 120
     FluidInitialization = 2
     updateQ = false
     ComponentAffinity = -1.0
     Blender = 0
-    wetting_bc = 1
+    wetting_bc = 0
     libb_bc = 1
 }
 
 Domain {
-    nproc = 1,1,1   // Number of processors (Npx,Npy,Npz)
-    n = 32, 32, 32     // Size of local domain (Nx,Ny,Nz)
+    nproc = 2,2,2   // Number of processors (Npx,Npy,Npz)
+    n = 16, 16, 16     // Size of local domain (Nx,Ny,Nz)
     N = 32, 32, 32
     nspheres = 0      // Number of spheres (only needed if using a sphere packing)
     L = 1.0, 1.0, 1.0            // Length of domain (x,y,z)
@@ -62,9 +62,9 @@ Domain {
 
 Analysis {
     blobid_interval = 50000000      // Frequency to perform blob identification
-    analysis_interval = 3000    // Frequency to perform analysis
+    analysis_interval = 700    // Frequency to perform analysis
     restart_interval = 100000000   // Frequency to write restart data
-    visualization_interval = 3000        // Frequency to write visualization data
+    visualization_interval = 700        // Frequency to write visualization data
     component_interval = 1000000
     restart_file = "Restart"    // Filename to use for restart file (will append rank)
     N_threads    = 0            // Number of threads to use
